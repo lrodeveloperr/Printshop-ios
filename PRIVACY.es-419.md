@@ -4,7 +4,7 @@ Vigente desde: 19 de septiembre de 2026
 
 Print Shop Job Manager es una aplicación publicada por Worksbien Studios.
 
-La aplicación prioriza el almacenamiento local. Los registros de los trabajos, el estado de producción, las vistas previas de las importaciones, el historial y las copias de seguridad se procesan en el dispositivo. Worksbien Studios no opera un sistema de cuentas ni un servicio en la nube para esta versión de la aplicación, y la aplicación no incluye anuncios, análisis de terceros ni seguimiento.
+La aplicación prioriza el almacenamiento local. Los registros de los trabajos, el estado de producción, las vistas previas de las importaciones, el historial y las copias de seguridad se procesan en el dispositivo. Worksbien Studios no opera un sistema de cuentas ni un servicio en la nube para esta versión de la aplicación, y la aplicación no incluye anuncios, análisis de terceros ni rastreo.
 
 La aplicación accede a archivos únicamente cuando el usuario selecciona un CSV o una copia de seguridad mediante el selector de archivos del sistema, o cuando decide exportar un CSV o una copia de seguridad. Los archivos exportados se envían únicamente al destino que el usuario seleccione. Los usuarios son responsables de proteger los archivos que exporten o compartan.
 

@@ -2,7 +2,7 @@
 
 ## Scope and status
 
-Reviewed locales: `de-DE` and `fr-FR`, both translated from the locked `en.json` master. The catalogs use natural trade vocabulary for garment decoration and keep machine identifiers untranslated. They are structurally release-ready, but neither locale is certified by a human native reviewer. UI integration, device testing, legal source text, and real-world import/export fixtures remain release blockers.
+Reviewed locales: `de-DE` and `fr-FR`, both translated from the locked `en.json` master. The catalogs use natural trade vocabulary for garment decoration and keep machine identifiers untranslated. Catalog and generated-resource integration are release-ready, but neither locale is certified by a human native reviewer. Device testing, legal review, and real-world import/export fixtures remain release gates.
 
 Status meanings:
 
@@ -19,7 +19,7 @@ Status meanings:
 | Native release runtime keys | PASS | PASS | Final release-source scan found no missing EN/DE/FR catalog key. The product-specific CSV row label and paywall separator are covered; all `%lld` and `%@` tokens are preserved exactly. |
 | Navigation and primary actions | PASS | PASS | Home, Jobs, Import, History, Settings, Done, Reset, See all, and View jobs are localized. |
 | Calm Summary home | PASS | PASS | Next step, attention, stage summary, and dashboard labels are concise. |
-| Jobs, search, and queue states | PASS | PASS | Job and stage labels are mapped; current prototype integration is BLOCKED because it still title-cases raw values. |
+| Jobs, search, and queue states | PASS | PASS | Native job and stage labels use closed mappings. The older web prototype still title-cases raw values but is outside this native Release gate. |
 | Sample customers, dates, and job states | PASS | PASS | Proper names remain unchanged; relative-date rendering must be generated at runtime. |
 | Guided sample workflow | PASS | PASS | Setup, first piece, production, final inspection, packing, handoff, completion, and reset are covered. |
 | Receiving and supply ownership | PASS | PASS | Shop-supplied, customer-supplied, unknown supplier, damaged/wrong/set-aside receiving buckets, receipts, shortages, and ownership outcomes are covered. |
@@ -34,10 +34,10 @@ Status meanings:
 | Error messages and recovery actions | PASS | PASS | 83 messages, including all 50 CSV diagnostics, both native-shell fallback errors, and `Row %lld`, are localized. Native product screens use typed keys. |
 | Confirmations and destructive actions | PASS | PASS | Workspace erasure and sample reset/remove copy is explicit. Destructive-action UI behavior still needs device testing. |
 | Empty and loading states | PASS | PASS | Native-shell loading, empty, selection, and retry states are translated with product-specific copy rather than template instructions. |
-| Accessibility labels and hints | PROVISIONAL | PROVISIONAL | Known shell controls are covered. BLOCKED for VoiceOver order, Dynamic Type, rotor, and control-label audit in the missing SwiftUI build. |
+| Accessibility labels and hints | PROVISIONAL | PROVISIONAL | Known shell controls are covered. VoiceOver order, Dynamic Type, rotor, and control-label behavior still require device testing in the SwiftUI build. |
 | Plurals | PASS | PASS | 12 plural messages contain required zero/one/other branches with matching typed placeholders. |
 | Non-plural placeholders | PASS | PASS | Twelve signatures match English exactly: two named-brace messages and ten native `%lld`/`%@` messages. |
-| Dates, times, numbers, quantities, and units | PROVISIONAL | PROVISIONAL | Copy is localized; runtime must use system `Locale` and Swift format styles. No hand-built punctuation or decimal parsing. |
+| Dates, times, numbers, quantities, and units | PROVISIONAL | PROVISIONAL | Native display uses system `Locale` and Swift format styles. Device output and imported numeric/date variants still require locale-specific fixtures. |
 | CSV import guidance and diagnostics | PROVISIONAL | PROVISIONAL | Copy and all known errors are covered. BLOCKED on comma/semicolon detection and real Excel fixtures from Germany and France. |
 | Export, PDF, and traveler | PROVISIONAL | PROVISIONAL | Use `Laufkarte/Auftragsbegleitschein` and `fiche suiveuse`. BLOCKED until representative PDFs/exports can be rendered and inspected. |
 | Backup and restore | PROVISIONAL | PROVISIONAL | Actions and warnings are covered. BLOCKED on localized filenames, filesystem dialogs, round-trip restore, and corruption testing. |
@@ -51,6 +51,22 @@ Status meanings:
 | iPhone/iPad truncation and layout | BLOCKED | BLOCKED | Requires the implemented SwiftUI app, Dynamic Type sizes, landscape, split view, and smallest supported devices. |
 | Debug-only Shell Lab | BLOCKED | BLOCKED | The Release app excludes this view. A DEBUG build still contains 14 English `LocalizedStringKey` literals plus verbatim enum/state values; localizing it requires Swift changes and is not a TestFlight release blocker. |
 | Human trade-language review | BLOCKED | BLOCKED | At least one qualified native speaker per locale who understands garment decoration must review the app in context. |
+
+## Final machine-gate results
+
+| Check | Result |
+|---|---:|
+| JSON catalog parsing | PASS — 3/3 |
+| Catalog parity | PASS — 535 strings, 12 signatures, and 12 plurals per locale |
+| Active Release SwiftUI references | PASS — 188 unique references, 0 missing |
+| Generated `.strings` parity | PASS — 535/535 per locale, 0 missing, 0 extra, 0 value drift |
+| Generated `.stringsdict` parity | PASS — 12/12 per locale, 0 missing, 0 extra, 0 value or structural drift |
+| Printf compatibility | PASS — all `%lld`, `%@`, and positional specifiers match their signatures |
+| Engine event labels | PASS — 49/49 commands plus 2 system/import events |
+| CSV diagnostics | PASS — 50/50 |
+| Legal translation structure and fixed identifiers | PASS — 4/4 documents |
+| Localized legal URL routing | PASS — de-DE and fr-FR privacy and terms routes |
+| Total machine failures | **0** |
 
 ## Canonical trade glossary
 

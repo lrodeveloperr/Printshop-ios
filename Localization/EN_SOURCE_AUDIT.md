@@ -4,7 +4,7 @@
 
 `en.json` is the canonical user-facing source catalog for Print Shop Job Manager. It uses one English master locale, not four English runtime catalogs. Dates, times, numbers, measurements, currency, and StoreKit prices must follow the user's system locale. Narrow regional vocabulary differences belong in a small override table only when a real user-facing difference is proven; import aliases must accept both `color`/`colour` and `traveler`/`traveller`.
 
-The source catalog is complete for the current locked web prototype, native shell, harness, documented engine vocabulary, settings inventory, import diagnostics, subscription copy, and presently specified backup/export surfaces. Catalog content is **PASS**. Runtime wiring is **BLOCKED** until generated native resources replace remaining hard-coded text and raw-code rendering.
+The source catalog is complete for the current locked web prototype, native shell, harness, documented engine vocabulary, settings inventory, import diagnostics, subscription copy, and presently specified backup/export surfaces. Catalog content is **PASS**. The native Release path is also **PASS**: its active SwiftUI references have zero missing keys, and generated EN/DE/FR resources exactly match the catalogs. The older web prototype remains a separate integration target.
 
 ## Canonical schema contract
 
@@ -101,11 +101,11 @@ The source catalog contains:
 - 12 plural messages and 12 typed non-plural placeholder signatures;
 - subscription, restore-purchase, offline-verification, destructive confirmation, backup, export, privacy, terms, and accessibility labels currently specified by the product materials.
 
-## Integration blockers
+## Remaining integration and verification work
 
 | Blocker | Required fix |
 |---|---|
-| The current prototype hard-codes English strings. | Generate String Catalog entries from these semantic IDs and route every visible surface through the localization layer. |
+| The older web prototype hard-codes English strings. | Route it through the same semantic IDs only if it remains a shipping target. This does not affect the native Release build. |
 | `ActivityScreen` renders `titleCase(event.type)`. | Map every event type through the closed `event.*` table. |
 | Jobs render raw or mechanically title-cased statuses. | Map job and stage states through `status.job.*` and `status.stage.*`. |
 | Toasts display raw `error.message`. | Map typed engine error codes to `error.*`; interpolate only allow-listed, escaped fields. |
@@ -114,8 +114,8 @@ The source catalog contains:
 | `labels.ts` models four English locales with empty override maps. | Replace with the single English catalog and add only proven, narrow overrides. |
 | The contract promises semicolon-separated European CSV support while the current parser is comma-only. | Add delimiter detection/selection and validate real German/French Excel exports before localized launch. |
 | Generated resources can drift after a canonical copy correction. | Regenerate all supported `.lproj` resources from the JSON catalogs and fail CI on missing keys, value drift, or printf/plural mismatch. |
-| Help, privacy policy, terms, App Store metadata, and screenshot copy are not final source documents. | Localize after legal/ASO source is frozen; do not infer legal meaning. |
+| Help content, App Store metadata, and screenshot copy are not final source documents. | Localize after their source text is frozen. German and French privacy/terms pages now exist and are selected by locale, but still require legal/native review. |
 
 ## Release gate
 
-The catalog may be treated as the locked localization contract, but the app must not be described as fully localized until the blockers above are closed, all device layouts pass truncation and VoiceOver checks, real CSV/PDF/backup artifacts pass round-trip tests, and qualified German- and French-speaking print-shop users review terminology in context. This audit is research-backed language work, not human-native certification.
+The native Release catalog/resource gate is closed with zero machine-detected gaps. Before describing the app as fully localized, complete device truncation and VoiceOver checks, German/French CSV and backup round trips, StoreKit purchase-state tests, legal review, and in-context review by qualified German- and French-speaking print-shop users. This audit is research-backed language work, not human-native certification.

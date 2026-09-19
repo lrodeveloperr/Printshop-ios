@@ -58,7 +58,7 @@ final class PrintShopStore {
 
     func nextActionKey(for job: PrintJob) -> String {
         if job.issue != nil { return "event.resolve_customer_replacement" }
-        switch job.progress {
+        return switch job.progress {
         case ...0: "event.receive"
         case 1: "event.start_setup"
         case 2: "event.record_first_article"
@@ -210,7 +210,7 @@ final class PrintShopStore {
     }
 
     private static func status(for progress: Int) -> PrintJobStatus {
-        switch progress {
+        return switch progress {
         case ...0: .handoff
         case 1: .preProduction
         case 2: .ready
@@ -223,7 +223,7 @@ final class PrintShopStore {
     }
 
     private static func eventKey(for progress: Int) -> String {
-        switch progress {
+        return switch progress {
         case 1: "event.receive"
         case 2: "event.start_setup"
         case 3: "event.record_first_article"

@@ -1,8 +1,8 @@
 # Print Shop Job Manager — Spanish and Brazilian Portuguese Localization QA
 
 **Catalogs:** `es-419.json`, `pt-BR.json`  
-**Review scope:** locked Calm Summary prototype plus the v2.1 engine contract/source  
-**Status:** **STRUCTURALLY COMPLETE; RELEASE BLOCKED PENDING NATIVE IN-CONTEXT QA AND UI WIRING**  
+**Review scope:** native SwiftUI TestFlight app, generated Apple resources, locked Calm Summary prototype, and v2.1 engine contract/source  
+**Status:** **NATIVE CATALOG GATE PASS; DEVICE AND HUMAN IN-CONTEXT REVIEW STILL REQUIRED**  
 **Certification claim:** None. This is a research-backed implementation pass, not human-native certification.
 
 ## 1. Locale decision
@@ -23,6 +23,9 @@ English regional App Store product pages may still be separate for ASO. They are
 
 Reviewed source:
 
+- Native `Shell/Product`, `Shell/Features`, `Shell/App`, and `Shell/Services` Swift sources
+- Generated `Shell/Resources/{es-419,pt-BR}.lproj` `.strings` and `.stringsdict` files
+- `PRIVACY.md`, `TERMS.md`, and the four controlled ES-419/PT-BR legal localizations
 - `/workspace/sites/print-shop-job-manager-test/app/page.tsx`
 - `/workspace/sites/print-shop-job-manager-test/app/layout.tsx`
 - `/workspace/sites/print-shop-job-manager-test/app/lib/harness.ts`
@@ -34,15 +37,17 @@ Reviewed source:
 
 Where documents conflict, the implementation pack and v2.1 source govern. The English product name is locked. Spanish and Portuguese titles remain candidate strings pending native garment-decoration review.
 
-The two catalogs now use the canonical `en.json` schema and exact key set. Each contains **533 static strings, 12 plural messages, and 11 explicit placeholder-signature records**:
+The two catalogs now use the canonical `en.json` schema and exact key set. Each contains **535 static strings, 12 plural messages, and 12 explicit placeholder-signature records**:
 
 | Group | Coverage |
 |---|---:|
 | Prototype, native shell, navigation, Home, Jobs, import, Activity, Settings, onboarding, commerce, guided sample and accessibility copy | Included |
-| Static strings | 533 |
+| Static strings | 535 |
 | Explicit plural messages | 12 |
-| Explicit placeholder signatures | 11 |
-| Legacy compiled-shell keys represented in the canonical catalogs | 108/108 |
+| Explicit placeholder signatures | 12 |
+| Generated Apple static-string resources | 535/535 per locale |
+| Generated Apple plural dictionaries | 12/12 per locale |
+| Current Swift catalog references | 199/199 |
 | Workflow event labels | 51/51 |
 | CSV error-code messages | 50/50 |
 | English engine-label authority codes | 50/50 |
@@ -80,33 +85,33 @@ Placeholder signatures are named and typed. Swift String Catalog conversion must
 |---|---|---|
 | App name and subtitle | PROVISIONAL | Uses the implementation pack candidates: **Gestor de Producción Gráfica / Serigrafía, bordado y DTF** and **Gestão de Estamparia / Pedidos, bordado e DTF**. Native trade and live-store review is still mandatory. |
 | Prototype metadata and review chrome | PASS | Every current title, description, device selector, caption, reset label, engine-progress string, and compiled shell key has a localized entry. Development-only diagnostics must remain excluded from normal production navigation. |
-| Navigation | PASS | Home/Jobs/Import/Activity/Settings and navigation accessibility labels are mapped. Product spec later calls for Board/Jobs/Work/More; source must be reconciled before native build. |
-| Calm Summary Home | PASS | Counts, next action, attention, stage summary, actions, toast copy, and accessibility summary are mapped. Plural keys replace the prototype's fixed English fragments. |
-| Sample data | PROVISIONAL | Customer names and order IDs correctly remain unchanged. Garment descriptions, quantities, states, due terms, guided actions, and reset copy are mapped. Full engine-generated sample travelers/PDFs do not yet exist in the native source. |
-| Jobs list/search | PASS | Search, relative due text, sample descriptions and visible states are mapped. Raw `titleCase(job.status)` must be replaced with status keys. |
-| Job workspace | BLOCKED | The authoritative product spec defines the surface, but the locked prototype does not implement its fields, exceptions, or accessibility behavior. Cataloged engine terms are ready for wiring, not proof of a complete screen. |
+| Navigation | PASS | Home, Jobs, Import, History, Settings, language selection, and navigation accessibility labels resolve through the generated locale resources. |
+| Calm Summary Home | PASS | Counts, next action, attention, stage summary, empty state, actions, and accessibility summary are mapped. Plural keys replace fixed count fragments. |
+| Sample data | PASS | Customer names and order IDs correctly remain unchanged. Garment descriptions, quantities, states, due terms, actions, reset, and removal copy are localized in the native app. |
+| Jobs list/search | PASS | Search, locale-formatted due dates, sample descriptions, status pills, and visible states use catalog keys or user data. No raw status code is rendered. |
+| Job workspace | PASS | Every user-visible string in the current simplified native job-detail screen resolves through the catalog. This does not claim that every future v2.1 workflow screen has been implemented. |
 | Receiving | PROVISIONAL | Supply, receipt, shortage, unmatched-receipt, ownership, receiving-exception, reason and account terms are mapped. No production receiving UI exists to validate order, truncation or operator comprehension. |
 | Production operations | PROVISIONAL | All six decoration methods, readiness/stage states, setup, first-piece, rework, vendor and batch event labels are mapped. First-piece and loss/refugo wording requires native in-context confirmation. |
 | Quality control | PROVISIONAL | Final QC, pass/reject, rework and external-return states are mapped. UI must consistently spell out quality control rather than expose `QC` to VoiceOver. |
 | Packing and release | PROVISIONAL | Package, unseal, partial delivery and final delivery events are mapped. The English source does not reliably distinguish shipping, delivery and pickup; source correction is required. |
 | Cancellation and holds | PROVISIONAL | Scope and physical-disposition labels are mapped. Required irreversible confirmations and consequence copy are absent from the prototype. |
-| Workflow history/activity | BLOCKED | All 51 authoritative event values now have localized labels, including `trusted-store-entitlement-observation`. The prototype still calls `titleCase(event.type)`, exposing hyphenated English codes. Replace that formatter with catalog lookup before release. |
-| Domain errors | BLOCKED | All stable error families have localized messages. The prototype passes raw `error.message` into toasts, so English invariant text can leak. Add a code-to-message adapter with structured details. |
-| CSV errors | BLOCKED | All 50 CSV codes plus row/field wrappers are mapped. Current UI shows raw parser messages; it must render localized code copy and separately interpolate row, field, received value and expectation. |
-| Confirmations and irreversible actions | BLOCKED | No final localized confirmation inventory exists for cancel, discard, return, unseal, restore or replacement decisions. Use explicit action labels, never generic Yes/No or Sim/Não. |
-| Accessibility labels and hints | BLOCKED | Current navigation, Settings, Home summary and search labels are covered. The full native screen inventory, VoiceOver hints/values, rotor order and dynamic-type checks do not exist. |
+| Workflow history/activity | PASS | All 51 authoritative engine events and every event emitted by the native product store resolve through catalog keys. The previously missing replacement-history key was removed from the native path. |
+| Domain errors | PASS | Active startup, product, file, import, and StoreKit error paths now resolve to localized safe messages. Disabled future backup/advertising providers must be re-audited if enabled. |
+| CSV errors | PASS | All 50 canonical CSV messages are present. The native parser's active subset resolves through localized keys and uses the typed `error.row` printf label rather than a bare row number. |
+| Confirmations and irreversible actions | PROVISIONAL | Current native actions use explicit localized labels. Future full-engine cancel, discard, return and unseal confirmations need a separate inventory when those screens are implemented; never use generic Yes/No or Sim/Não. |
+| Accessibility labels and hints | PROVISIONAL | Current navigation, Settings, Home summary, paywall, legal actions and search labels are localized. VoiceOver focus order, pronunciation and largest Dynamic Type still require device testing. |
 | Plurals | PASS | Twelve count families contain explicit `zero`, `one` and `other` variants with matching `{count:Int}` signatures. Convert them to String Catalog plural variations; do not keep fixed singular English fragments. |
-| Dates, time, numbers and units | BLOCKED | Source currently calls `toLocaleString` but the site document is fixed to `en-US`. Native UI must use `Date.FormatStyle`, `Number.FormatStyle` and explicit shop-unit preferences. Never hand-build dates or decimal separators. |
-| CSV import flow | BLOCKED | All present buttons, states, counts and 50 parser-error codes are mapped. Runtime still needs localized header aliases, comma/semicolon/tab detection, UTF-8/BOM testing and removal of raw English errors. Canonical export data should retain ISO 8601 dates and stable machine headers. |
-| Exports and PDF traveler | BLOCKED | Contract requires localized travelers and exports, but no rendering source or complete label inventory exists. Must test fonts for ñ/á/ç/ã/õ, wrapping, repeated headers, pagination, status/reason mapping and safe filenames. |
-| Backup and restore | BLOCKED | Shell labels, keep/replace conflict choices, local-first notice, and common storage errors are mapped. Restore progress, success, destructive confirmation, and complete corruption/incompatible-version handling still need runtime review. |
+| Dates, time, numbers and units | PASS | Native dates and subscription dates use locale-aware Foundation format styles. Canonical CSV export correctly retains machine-safe ISO dates. |
+| CSV import flow | PASS | Buttons, states, counts, active parser errors and row labels are localized. The parser accepts comma, semicolon, tab and pipe delimiters plus UTF-8/UTF-16 BOM input; stable machine headers and user data remain untranslated. |
+| Exports and PDF traveler | PROVISIONAL | Current CSV export uses stable machine headers and preserves user data. The future full-engine PDF traveler has no rendering source yet and will require font, wrapping, pagination, status/reason and filename QA. |
+| Backup and restore | PASS | The current local export/backup/restore rows and safe errors are localized. The misleading add-or-replace subtitle was removed from the direct file-restore path; the optional provider-based conflict screen remains disabled. |
 | Paywall and subscription | PROVISIONAL | The catalog truthfully states five real jobs free, Pro-only unlimited new-job creation, no ads, no timed trial, monthly/annual App Store pricing, and continued access to existing jobs, completion, backups and exports after expiry. Purchase, restore, pending, verification, billing-retry, grace and expiry copy is mapped. Release still requires StoreKit-sourced prices/cadence and native transaction-state testing. |
-| Settings | PROVISIONAL | Every currently visible row is mapped. Language selection, shop units, operator reset, storage use, sample reset, export/archive, subscription and legal subflows are not implemented in the prototype. |
-| Help, privacy and terms | BLOCKED | Only the Settings destination is present. Localized legal/help content and locale-correct URLs must ship with the locale; an English-only page fails the 100% localization requirement. |
-| Empty states | PROVISIONAL | The compiled shell's Jobs, selection and backup empty states are mapped, as is the Activity empty state. Import history, search-no-results, archived jobs and unavailable-purchase empty states still need a final inventory. |
-| Loading/progress/offline states | BLOCKED | Shell loading/error/retry and StoreKit loading/retry copy is mapped. Import, restore and export progress remain incomplete. Local production copy does not imply that internet is required, but the behavior still needs device testing. |
+| Settings | PASS | Every currently visible row, subtitle, subscription status, language option, sample action, local export/backup action, and legal destination is mapped. Debug-only Shell Lab text is excluded from release builds. |
+| Help, privacy and terms | PASS | Faithful ES-419 and PT-BR privacy policies and terms exist, and `LegalView` selects locale-specific URLs with English fallback. The four files must be pushed in the same commit as the configured URLs. |
+| Empty states | PASS | Home, Jobs/search, History, selection and backup empty states resolve through appropriate localized keys. The Home screen no longer reuses History copy. |
+| Loading/progress/offline states | PASS | Current shell, import, safe file-error, StoreKit loading/retry and offline-verification copy is mapped. Local production copy does not imply that internet is required. |
 | Notifications | PROVISIONAL | No local notifications are defined in the locked launch source. Do not add them during translation. If reminders are added, title/body/action/accessibility copy needs a new reviewed inventory. |
-| Locale switching with existing records | BLOCKED | Stored engine codes are locale-safe, but no native language switch or cross-locale persistence test exists. User-entered data must never be translated or rewritten. |
+| Locale switching with existing records | PROVISIONAL | The native selector exposes the five complete catalogs plus System and persists the choice. Stored codes and user data remain unchanged; cross-locale persistence still needs device testing. |
 | Store screenshots and metadata | BLOCKED | App names/subtitles are candidate copy only. Screenshots, description, keywords, privacy answers and subscription disclosures require a separate store-localization pass. |
 
 ## 5. Canonical authority additions — resolved
@@ -123,7 +128,9 @@ Machine comparison confirms exact key parity with `en.json`. The targeted v2.1 i
 
 The subsequent runtime-shell reconciliation added 107 previously absent static keys and 9 placeholder signatures; together with the already shared subscription-management key, this covers all **108/108** keys in the compiled English shell inventory. It also localizes compiled-but-currently-unused onboarding and diagnostic states so a future code path cannot silently fall back to English. The old generic `.strings` values were used only as a key inventory; corrected product-specific values in `en.json` remained the semantic authority.
 
-## 6. Suggested source corrections
+The final native pass added the typed `error.row` message and the localized SwiftUI separator key, bringing the authority to **535 static strings and 12 placeholder signatures**. It also verified every current Swift reference, corrected the device-processing, empty-state, final-inspection, package-release, replacement-history and App Store price-loading wording, and generated matching Apple resources. Current native key gap: **0**.
+
+## 6. Open full-engine source corrections
 
 These are source-copy corrections, not silent translation choices. The English master should be repaired before native catalogs are generated.
 
@@ -144,11 +151,8 @@ These are source-copy corrections, not silent translation choices. The English m
 | `Create package` | Describes a database record rather than the shop action | `Pack 4 shirts` or `Confirm package` depending on whether packing has physically happened. |
 | `Pass final inspection` | `Pass` can describe the object or the action | `Approve final quality check`. |
 | `Mark 4 good` | Colloquial and lacks the operation | `Record 4 approved`. |
-| `Nothing leaves this device` | Too absolute if StoreKit verification, remote legal pages or user-initiated exports use network/sharing | `This CSV is processed on this device.` Keep the broader privacy promise in reviewed policy copy. |
 | `Reset` | Could imply deleting the entire workspace | `Reset sample job`. |
 | `Files on this device` | Does not explain export/backup destination or scope | `Stored on this device`; explain export separately. |
-| `titleCase(event.type)` and `titleCase(status)` | Produces raw or malformed code labels and cannot localize | Resolve every code through `event.*` and `status.*` catalogs; unknown codes display a safe localized fallback and are logged. |
-| Raw `error.message` in toasts | Leaks developer English and may expose internal identifiers | Resolve the stable code to localized copy, then add structured row/field/job context. Never show the raw invariant message by default. |
 
 ## 7. Terminology decisions and provisional terms
 
@@ -177,18 +181,18 @@ Do not translate `traveler` as *viajero* or *viajante*. The native surface shoul
 
 ## 8. Required native runtime gate
 
-Before either locale can be marked release-ready:
+Before either locale can be marked fully release-certified:
 
-1. Convert the JSON entries to the native String Catalog without changing IDs or placeholder signatures.
-2. Replace every literal in the SwiftUI production target; development preview chrome must be excluded.
-3. Replace `titleCase` and raw `error.message` paths with catalog lookup.
-4. Render every key on iPhone SE and iPad in portrait and landscape, with largest supported Dynamic Type.
-5. Walk normal, interrupted and exception paths for receiving, first piece, all six methods, vendor work, QC, rework, packing, partial delivery, cancellation, CSV import, export, backup/restore and entitlement expiry.
-6. Verify VoiceOver labels, hints, values, focus order and pronunciation of DTF/DTG.
-7. Test zero, one, two and large counts for every plural key.
-8. Test locale switching with existing records and confirm that identifiers and user-entered text are unchanged.
-9. Render every CSV error using structured row/field context and confirm no English message or raw code appears.
-10. Obtain fluent in-context review by someone familiar with garment decoration in Latin America and Brazil; fix findings upstream and repeat screenshots/tests.
+1. **PASS —** Generate native `.strings` and `.stringsdict` resources without changing IDs or typed placeholder signatures.
+2. **PASS —** Scan the production Swift target: all 199 current catalog references resolve, with no active English literal or raw code path found.
+3. **PASS —** Route startup, product, file, import and StoreKit failures through localized safe messages.
+4. Render every screen on compact iPhone and iPad layouts, in portrait and landscape where supported, with the largest supported Dynamic Type.
+5. Walk every implemented normal, interrupted and exception path for sample jobs, CSV import, replacement handling, production progress, final inspection, packing, release, local export/backup/restore and entitlement expiry.
+6. Verify VoiceOver labels, hints, values, focus order and pronunciation of DTF/DTG on devices.
+7. Test zero, one, two and large counts for all 12 plural keys; structural plural validation already passes.
+8. Test locale switching with existing records and confirm that identifiers and user-entered text remain unchanged.
+9. Trigger every active CSV error with structured row context and confirm no English message or raw code appears; structural key and printf validation already passes.
+10. Obtain fluent in-context review by garment-decoration users in Latin America and Brazil; fix findings upstream and repeat screenshots/tests.
 
 ## 9. Machine-check results
 
@@ -196,9 +200,9 @@ Run against both catalogs after creation:
 
 ```text
 Localized catalogs checked:              2
-Static strings per locale:             533
+Static strings per locale:             535
 Plural messages per locale:             12
-Explicit placeholder signatures:        11
+Explicit placeholder signatures:        12
 Static-string key differences vs en:      0
 Plural-key differences vs en:             0
 Placeholder-key differences vs en:        0
@@ -206,16 +210,25 @@ Blank values:                             0
 Placeholder signature mismatches:         0
 Placeholder token mismatches:             0
 Values equal to raw machine codes:         0
-Compiled-shell keys covered:          108/108
+Current Swift catalog refs covered:   199/199
+Missing current Swift keys:                 0
+Generated static resources:           535/535 per locale
+Generated plural dictionaries:          12/12 per locale
+Generated value/printf mismatches:           0
+Generated plural-rule mismatches:            0
 Commerce-contract keys covered:          9/9
 English label-authority codes covered:    50/50
 Workflow event labels in catalog:         51
 Authoritative event values covered:       51/51
 CSV error codes covered:                  50/50
+Localized legal documents:                  4/4
+Localized legal URL routes:                  4/4
 ```
 
 Both files parse as valid JSON. This Spanish/Portuguese pass did not edit the German or French catalogs.
 
 ## 10. Current verdict
 
-The Spanish and Brazilian Portuguese catalogs are suitable as an implementation baseline and close the known structural vocabulary gaps, including the compiled shell and paywall states. They do **not** yet establish 100% product localization because several native workflows, complete legal/help content, export rendering, runtime catalog wiring, and in-context native QA are still unverified. Release status for both locales remains **BLOCKED** until the runtime gate above passes.
+**Final native catalog verdict: PASS with zero active key, generated-resource, placeholder, plural or legal-routing gaps for ES-419 and PT-BR.** The current SwiftUI product surfaces, Settings, language selector, paywall, active errors and localized legal pages are fully represented in both generated bundles.
+
+This is not a claim of human-native certification or complete future v2.1 engine localization. Device layout, VoiceOver, end-to-end exception-path testing, legal-page publication in the release commit, and fluent garment-decoration user review remain release-process gates.
