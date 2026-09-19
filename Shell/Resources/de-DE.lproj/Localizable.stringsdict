@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>count.active_jobs</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld aktiver Auftrag</string>
+			<key>other</key>
+			<string>%lld aktive Aufträge</string>
+			<key>zero</key>
+			<string>Keine aktiven Aufträge</string>
+		</dict>
+	</dict>
+	<key>count.blocked_jobs</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld gesperrt</string>
+			<key>other</key>
+			<string>%lld gesperrt</string>
+			<key>zero</key>
+			<string>Keine gesperrten Aufträge</string>
+		</dict>
+	</dict>
+	<key>count.due_today</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld heute fällig</string>
+			<key>other</key>
+			<string>%lld heute fällig</string>
+			<key>zero</key>
+			<string>Heute nichts fällig</string>
+		</dict>
+	</dict>
+	<key>count.file_issues</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Beheben Sie %lld Problem in der Datei.</string>
+			<key>other</key>
+			<string>Beheben Sie %lld Probleme in der Datei.</string>
+			<key>zero</key>
+			<string>Keine Dateiprobleme</string>
+		</dict>
+	</dict>
+	<key>count.free_jobs_remaining</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Noch %lld kostenloser Auftrag</string>
+			<key>other</key>
+			<string>Noch %lld kostenlose Aufträge</string>
+			<key>zero</key>
+			<string>Keine kostenlosen Aufträge mehr</string>
+		</dict>
+	</dict>
+	<key>count.hoodies</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld Hoodie</string>
+			<key>other</key>
+			<string>%lld Hoodies</string>
+			<key>zero</key>
+			<string>Keine Hoodies</string>
+		</dict>
+	</dict>
+	<key>count.jobs_added</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld Auftrag zum aktiven Arbeitsbereich hinzugefügt.</string>
+			<key>other</key>
+			<string>%lld Aufträge zum aktiven Arbeitsbereich hinzugefügt.</string>
+			<key>zero</key>
+			<string>Keine Aufträge zum aktiven Arbeitsbereich hinzugefügt.</string>
+		</dict>
+	</dict>
+	<key>count.polo_shirts</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld Poloshirt</string>
+			<key>other</key>
+			<string>%lld Poloshirts</string>
+			<key>zero</key>
+			<string>Keine Poloshirts</string>
+		</dict>
+	</dict>
+	<key>count.replacements_needed</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld Ersatz erforderlich</string>
+			<key>other</key>
+			<string>%lld Ersatztextilien erforderlich</string>
+			<key>zero</key>
+			<string>Kein Ersatz erforderlich</string>
+		</dict>
+	</dict>
+	<key>count.rows_checked</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld Zeile geprüft</string>
+			<key>other</key>
+			<string>%lld Zeilen geprüft</string>
+			<key>zero</key>
+			<string>Keine Zeilen geprüft</string>
+		</dict>
+	</dict>
+	<key>count.shirts</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld Shirt</string>
+			<key>other</key>
+			<string>%lld Shirts</string>
+			<key>zero</key>
+			<string>Keine Shirts</string>
+		</dict>
+	</dict>
+	<key>count.tote_bags</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld Stofftasche</string>
+			<key>other</key>
+			<string>%lld Stofftaschen</string>
+			<key>zero</key>
+			<string>Keine Stofftaschen</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
